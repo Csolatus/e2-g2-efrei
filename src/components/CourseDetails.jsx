@@ -14,8 +14,8 @@ function CourseDetails({ course }) {
       </p>
       <h3 className="h6">Programme</h3>
       <ul>
-        {course.modules.map((module) => (
-          <li key={module}>{module}</li>
+        {course.modules.map((courseModule) => (
+          <li key={courseModule}>{courseModule}</li>
         ))}
       </ul>
       <TechBadges technologies={course.technologies} />

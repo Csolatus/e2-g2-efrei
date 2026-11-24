@@ -21,10 +21,25 @@ const validateName = (value, label) => {
   return '';
 };
 
+/**
+ * Valide le prénom : obligatoire, 2 caractères minimum.
+ * @param {string} value - Valeur saisie.
+ * @returns {string} Message d'erreur, ou chaîne vide si la valeur est valide.
+ */
 export const validateFirstName = (value) => validateName(value, 'prénom');
 
+/**
+ * Valide le nom de famille : obligatoire, 2 caractères minimum.
+ * @param {string} value - Valeur saisie.
+ * @returns {string} Message d'erreur, ou chaîne vide si la valeur est valide.
+ */
 export const validateLastName = (value) => validateName(value, 'nom');
 
+/**
+ * Valide l'adresse email : obligatoire et au format nom@domaine.ext.
+ * @param {string} value - Valeur saisie.
+ * @returns {string} Message d'erreur, ou chaîne vide si la valeur est valide.
+ */
 export const validateEmail = (value) => {
   if (!value) return 'Veuillez saisir votre adresse email.';
   if (!EMAIL_REGEX.test(value)) {
@@ -33,6 +48,11 @@ export const validateEmail = (value) => {
   return '';
 };
 
+/**
+ * Valide le téléphone : obligatoire, avec indicatif international (ex. +33 6 12 34 56 78).
+ * @param {string} value - Valeur saisie.
+ * @returns {string} Message d'erreur, ou chaîne vide si la valeur est valide.
+ */
 export const validatePhone = (value) => {
   if (!value) return 'Veuillez saisir votre numéro de téléphone.';
   if (!PHONE_REGEX.test(value)) {
@@ -55,12 +75,27 @@ export const validateExperience = (value) => {
   return '';
 };
 
+/**
+ * Valide le choix de formation : obligatoire.
+ * @param {string} value - Valeur saisie.
+ * @returns {string} Message d'erreur, ou chaîne vide si la valeur est valide.
+ */
 export const validateCourse = (value) =>
   value ? '' : 'Veuillez choisir une formation.';
 
+/**
+ * Valide le niveau déclaré : obligatoire.
+ * @param {string} value - Valeur saisie.
+ * @returns {string} Message d'erreur, ou chaîne vide si la valeur est valide.
+ */
 export const validateLevel = (value) =>
   value ? '' : 'Veuillez indiquer votre niveau.';
 
+/**
+ * Valide la motivation : obligatoire, 50 caractères minimum.
+ * @param {string} value - Valeur saisie.
+ * @returns {string} Message d'erreur, ou chaîne vide si la valeur est valide.
+ */
 export const validateMotivation = (value) => {
   if (!value) return 'Veuillez expliquer votre motivation.';
   if (value.length < MOTIVATION_MIN_LENGTH) {
@@ -69,6 +104,8 @@ export const validateMotivation = (value) => {
   return '';
 };
 
+// L'ordre des clés suit celui des champs du formulaire : useForm s'en sert pour
+// donner le focus au premier champ en erreur.
 const fieldValidators = {
   firstname: validateFirstName,
   lastname: validateLastName,

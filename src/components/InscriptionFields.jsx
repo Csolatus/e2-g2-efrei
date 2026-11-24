@@ -3,7 +3,8 @@ import useForm from '../hooks/useForm.jsx';
 import FormField from './FormField.jsx';
 import Modal from './Modal.jsx';
 import { validateForm } from '../utils/validation.js';
-import { MOTIVATION_MIN_LENGTH, EXPERIENCE_MIN, EXPERIENCE_MAX } from '../config/formRules.js';
+import { MOTIVATION_MIN_LENGTH } from '../config/formRules.js';
+import { TEXT_FIELDS } from '../config/inscriptionFields.js';
 
 const EMPTY_VALUES = {
   firstname: '',
@@ -45,7 +46,11 @@ function InscriptionFields({ courses, levels, initialCourseId }) {
 
   const onValidSubmit = (submitted) => {
     const course = courses.find((item) => String(item.id) === submitted.course);
-    setConfirmation({ firstname: submitted.firstname.trim(), email: submitted.email.trim(), courseTitle: course.title });
+    setConfirmation({
+      firstname: submitted.firstname.trim(),
+      email: submitted.email.trim(),
+      courseTitle: course.title,
+    });
     reset();
   };
 
@@ -54,19 +59,30 @@ function InscriptionFields({ courses, levels, initialCourseId }) {
       <form noValidate onSubmit={handleSubmit(onValidSubmit)} className="d-flex flex-column gap-3">
         <p className="text-muted mb-0">Les champs marqués d'une étoile (*) sont obligatoires.</p>
         <div className="row g-3">
-          <div className="col-md-6"><FormField {...fieldProps('firstname')} label="Prénom" required autoComplete="given-name" /></div>
-          <div className="col-md-6"><FormField {...fieldProps('lastname')} label="Nom" required autoComplete="family-name" /></div>
-          <div className="col-md-6"><FormField {...fieldProps('email')} label="Email" type="email" required autoComplete="email" placeholder="nom@exemple.com" /></div>
-          <div className="col-md-6"><FormField {...fieldProps('phone')} label="Téléphone" type="tel" required autoComplete="tel" placeholder="+33 6 12 34 56 78" /></div>
-          <div className="col-md-6"><FormField {...fieldProps('company')} label="Entreprise" autoComplete="organization" /></div>
+          {TEXT_FIELDS.map(({ name, ...fieldConfig }) => (
+            <div className="col-md-6" key={name}>
+              <FormField {...fieldProps(name)} {...fieldConfig} />
+            </div>
+          ))}
           <div className="col-md-6">
-            <FormField {...fieldProps('experience')} label="Expérience (en années)" type="number" min={EXPERIENCE_MIN} max={EXPERIENCE_MAX} step={1} />
+            <FormField
+              {...fieldProps('course')}
+              as="select"
+              label="Formation"
+              required
+              options={courseOptions}
+              placeholderOption="Choisissez une formation"
+            />
           </div>
           <div className="col-md-6">
-            <FormField {...fieldProps('course')} as="select" label="Formation" required options={courseOptions} placeholderOption="Choisissez une formation" />
-          </div>
-          <div className="col-md-6">
-            <FormField {...fieldProps('level')} as="select" label="Votre niveau" required options={levelOptions} placeholderOption="Choisissez un niveau" />
+            <FormField
+              {...fieldProps('level')}
+              as="select"
+              label="Votre niveau"
+              required
+              options={levelOptions}
+              placeholderOption="Choisissez un niveau"
+            />
           </div>
           <div className="col-12">
             <FormField
@@ -84,8 +100,9 @@ function InscriptionFields({ courses, levels, initialCourseId }) {
       <Modal isOpen={confirmation !== null} title="Inscription envoyée" onClose={closeConfirmation}>
         {confirmation && (
           <p>
-            Merci {confirmation.firstname}, votre demande d'inscription à la formation « {confirmation.courseTitle} » a bien
-            été enregistrée. Un conseiller vous contactera sous 48h à l'adresse {confirmation.email}.
+            Merci {confirmation.firstname}, votre demande d'inscription à la formation
+            « {confirmation.courseTitle} » a bien été enregistrée. Un conseiller vous
+            contactera sous 48h à l'adresse {confirmation.email}.
           </p>
         )}
       </Modal>

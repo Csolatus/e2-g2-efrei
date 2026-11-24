@@ -29,8 +29,18 @@ function CatalogContent({ data, catalog, renderCard, renderDetails }) {
   return (
     <>
       <div className="d-flex flex-column gap-3 mb-4">
-        <SearchBar id={`${catalog.id}-search`} value={query} onChange={setQuery} label={`Rechercher dans ${catalog.title}`} />
-        <FilterBar idPrefix={`${catalog.id}-filter`} filters={filterBarConfig} values={values} onChange={setFilter} />
+        <SearchBar
+          id={`${catalog.id}-search`}
+          value={query}
+          onChange={setQuery}
+          label={`Rechercher dans ${catalog.title}`}
+        />
+        <FilterBar
+          idPrefix={`${catalog.id}-filter`}
+          filters={filterBarConfig}
+          values={values}
+          onChange={setFilter}
+        />
         <p className="text-muted mb-0" aria-live="polite">
           {results.length} résultat{results.length > 1 ? 's' : ''}
         </p>
