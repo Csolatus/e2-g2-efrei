@@ -81,12 +81,12 @@ const fieldValidators = {
 };
 
 /**
- * Valide tous les champs du formulaire d'inscription.
+ * Valide tous les champs du formulaire d'inscription (les valeurs sont nettoyées des espaces en bord).
  * @param {Object<string, string>} values - Valeurs du formulaire, indexées par nom de champ.
  * @returns {Object<string, string>} Messages d'erreur indexés par champ ; objet vide si le formulaire est valide.
  */
 export const validateForm = (values) =>
   Object.entries(fieldValidators).reduce((errors, [field, validate]) => {
-    const message = validate(values[field] ?? '');
+    const message = validate(String(values[field] ?? '').trim());
     return message ? { ...errors, [field]: message } : errors;
   }, {});
