@@ -1,8 +1,14 @@
+import Hero from '../components/Hero.jsx';
+import ProjectsSection from '../components/ProjectsSection.jsx';
+import CoursesSection from '../components/CoursesSection.jsx';
+
 function Home() {
   return (
-    <section className="container py-5">
-      <h1>Accueil</h1>
-    </section>
+    <>
+      <Hero />
+      <ProjectsSection />
+      <CoursesSection />
+    </>
   );
 }
 

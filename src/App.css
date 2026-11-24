@@ -7,3 +7,28 @@
 .app-main {
   flex: 1;
 }
+
+.hero-subtitle {
+  max-width: 40rem;
+}
+
+.fade-in {
+  animation: fade-in 0.8s ease both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+}

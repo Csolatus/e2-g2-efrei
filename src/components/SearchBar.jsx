@@ -1,9 +1,9 @@
-function SearchBar({ value, onChange, label = 'Rechercher', placeholder = 'Rechercher…' }) {
+function SearchBar({ id, value, onChange, label = 'Rechercher', placeholder = 'Rechercher…' }) {
   return (
     <div>
-      <label htmlFor="search-input" className="visually-hidden">{label}</label>
+      <label htmlFor={id} className="visually-hidden">{label}</label>
       <input
-        id="search-input"
+        id={id}
         type="search"
         className="form-control"
         value={value}

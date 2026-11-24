@@ -1,9 +1,7 @@
+import ProjectsSection from '../components/ProjectsSection.jsx';
+
 function ProjectsPage() {
-  return (
-    <section className="container py-5">
-      <h1>Projets</h1>
-    </section>
-  );
+  return <ProjectsSection />;
 }
 
 export default ProjectsPage;

@@ -1,9 +1,7 @@
+import CoursesSection from '../components/CoursesSection.jsx';
+
 function CoursesPage() {
-  return (
-    <section className="container py-5">
-      <h1>Formations</h1>
-    </section>
-  );
+  return <CoursesSection />;
 }
 
 export default CoursesPage;
